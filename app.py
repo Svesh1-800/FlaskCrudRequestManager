@@ -24,7 +24,8 @@ class Data(db.Model):
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    all_data = Data.query.all()
+    return render_template("index.html", all_data = all_data)
 
 @app.route('/insert',methods=['POST'])
 def insert():
