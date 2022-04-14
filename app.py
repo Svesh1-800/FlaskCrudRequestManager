@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, url_for
+from flask import render_template, url_for, request,redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -21,10 +21,23 @@ class Data(db.Model):
         self.email = email
         self.phone = phone
 
+
 @app.route('/')
 def index():
     return render_template("index.html")
 
+@app.route('/insert',methods=['POST'])
+def insert():
+    if request.method=="POST":
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+
+        my_data = Data(name, email, phone)
+        db.session.add(my_data)
+        db.session.commit()
+        flash("DONE")
+        return redirect(url_for('index'))
 
 if __name__=="__main__":
     app.run(debug=True)
