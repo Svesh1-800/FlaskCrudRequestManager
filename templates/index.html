@@ -71,8 +71,9 @@
                                     <h4 class="modal-title">Edit request</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="#" method="POST">
+                                    <form action="{{ url_for('update') }}" method="POST">
                                         <div class="form-group">
+                                            <input type="hidden"  name="id" value="{{item.id}}">
                                             <label>Name:</label>
                                             <input type="text" class="form-control" name="name" required="1"
                                                 value="{{item.name}}">
@@ -87,15 +88,16 @@
                                             <input type="number" class="form-control" name="phone" required="1"
                                                 value="{{item.phone}}">
                                         </div>
-                                        
+                                        <div class="modal-footer">
+
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button class="btn btn-primary" type="submit">Save</button>
+                                        </div>
+
                                     </form>
                                 </div>
-                                <div class="modal-footer">
-                                    
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                        <button class="btn btn-primary" type="submit">Save</button>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -124,12 +126,14 @@
                                     <label>Phone:</label>
                                     <input type="number" class="form-control" name="phone" required="1">
                                 </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary" type="submit">Add request</button>
+                                </div>
                             </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button class="btn btn-primary" type="submit">Add request</button>
-                        </div>
+
                     </div>
                 </div>
             </div>

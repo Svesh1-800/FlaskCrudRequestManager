@@ -40,11 +40,13 @@ def insert():
         flash("DONE")
         return redirect(url_for('index'))
 
-@app.route('/update', methods = ['GET', 'POST'])
+@app.route('/update', methods = ['POST'])
 def update():
  
     if request.method == 'POST':
+        
         my_data = Data.query.get(request.form.get('id'))
+        
  
         my_data.name = request.form['name']
         my_data.email = request.form['email']
@@ -54,6 +56,8 @@ def update():
         flash("Employee Updated Successfully")
  
         return redirect(url_for('index'))
+    else:
+        return "это фигня"
 
 @app.route('/delete/<id>/', methods = ['GET', 'POST'])
 def delete(id):
