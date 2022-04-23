@@ -1,33 +1,15 @@
-from flask import Flask
 from flask import render_template, url_for, request,redirect, flash
-from flask_sqlalchemy import SQLAlchemy
+from flask import Blueprint
 
+from .models import Data, db
 
-app = Flask(__name__)
+crud_requests = Blueprint('crud-requests', __name__)
 
-app.secret_key = "Secret key"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-class Data(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    email = db.Column(db.String(100))
-    phone = db.Column(db.String(100))
-
-    def __init__(self,name,email,phone):
-        self.name = name
-        self.email = email
-        self.phone = phone
-
-
-@app.route('/')
+@crud_requests.route('/')
 def index():
     all_data = Data.query.all()
     return render_template("index.html", all_data = all_data)
-
-@app.route('/insert',methods=['POST'])
+@crud_requests.route('/insert',methods=['POST'])
 def insert():
     if request.method=="POST":
         name = request.form['name']
@@ -38,9 +20,9 @@ def insert():
         db.session.add(my_data)
         db.session.commit()
         flash("DONE")
-        return redirect(url_for('index'))
+        return redirect(url_for('crud-requests.index'))
 
-@app.route('/update', methods = ['POST'])
+@crud_requests.route('/update', methods = ['POST'])
 def update():
  
     if request.method == 'POST':
@@ -55,17 +37,15 @@ def update():
         db.session.commit()
         flash("Employee Updated Successfully")
  
-        return redirect(url_for('index'))
+        return redirect(url_for('crud-requests.index'))
     else:
         return "это фигня"
 
-@app.route('/delete/<id>/', methods = ['GET', 'POST'])
+@crud_requests.route('/delete/<id>/', methods = ['GET', 'POST'])
 def delete(id):
     my_data = Data.query.get(id)
     db.session.delete(my_data)
     db.session.commit()
     flash("Employee Deleted Successfully")
  
-    return redirect(url_for('index'))
-if __name__=="__main__":
-    app.run(debug=True)
+    return redirect(url_for('crud-requests.index'))
