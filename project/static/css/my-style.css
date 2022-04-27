@@ -4,3 +4,9 @@
     background-color: #e9ecef;
     border-radius: .3rem;
   }
+
+  @media (max-width: 775px) {
+    .need-hide{
+      display: none;
+    }
+  }

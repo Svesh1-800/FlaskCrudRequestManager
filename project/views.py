@@ -19,7 +19,7 @@ def insert():
         my_data = Data(name, email, phone)
         db.session.add(my_data)
         db.session.commit()
-        flash("DONE")
+        flash("New request was created")
         return redirect(url_for('crud-requests.index'))
 
 @crud_requests.route('/update', methods = ['POST'])
@@ -35,17 +35,15 @@ def update():
         my_data.phone = request.form['phone']
  
         db.session.commit()
-        flash("Employee Updated Successfully")
+        flash("Request was updated successfully")
  
         return redirect(url_for('crud-requests.index'))
-    else:
-        return "это фигня"
 
 @crud_requests.route('/delete/<id>/', methods = ['GET', 'POST'])
 def delete(id):
     my_data = Data.query.get(id)
     db.session.delete(my_data)
     db.session.commit()
-    flash("Employee Deleted Successfully")
+    flash("Request was deleted successfully")
  
     return redirect(url_for('crud-requests.index'))

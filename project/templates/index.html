@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col md-12">
             <div class="jumbotron p-3">
-                <h2>Manage <b>Requests</b><button type="button" class="btn btn-success float-end" data-bs-toggle="modal"
+                <h2>Manage <b>Requests</b><button type="button" class="btn btn-success float-end need-hide" data-bs-toggle="modal"
                         data-bs-target="#addRow">Add new request</button></h2>
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
@@ -25,17 +25,17 @@
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Action</th>
+                        <th class="need-hide">Email</th>
+                        <th class="need-hide">Phone</th>
+                        <th class="need-hide">Action</th>
                     </tr>
                     {% for item in all_data %}
                     <tr>
                         <td>{{item.id}}</td>
                         <td>{{item.name}}</td>
-                        <td>{{item.email}}</td>
-                        <td>{{item.phone}}</td>
-                        <td>
+                        <td class="need-hide">{{item.email}}</td>
+                        <td class="need-hide">{{item.phone}}</td>
+                        <td class="need-hide">
                             <a href="#" class="btn btn-warning btn-xs" data-bs-toggle="modal"
                                 data-bs-target="#editRow{{item.id}}">Edit</a>
                             <a href="#" class="btn btn-danger btn-xs" data-bs-toggle="modal"
