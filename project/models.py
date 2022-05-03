@@ -1,5 +1,5 @@
 import datetime
-from project import db
+from .database import db
 from werkzeug.security import generate_password_hash,  check_password_hash
 
 class Data(db.Model):
@@ -7,7 +7,6 @@ class Data(db.Model):
     name = db.Column(db.String(100))
     email = db.Column(db.String(100))
     phone = db.Column(db.String(100))
-    #req_type_id = db.Column(db.Integer, db.ForeignKey('type_of_request.id'))
     def __init__(self,name,email,phone):
         self.name = name
         self.email = email
@@ -29,7 +28,3 @@ class User(db.Model):
     def check_password(self,  password):
 	    return check_password_hash(self.password_hash, password)
     
-""" class TypeOfRequest(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    data_id = db.relationship('Data',backref='request') """

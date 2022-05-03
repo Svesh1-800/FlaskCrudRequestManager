@@ -1,15 +1,15 @@
 from flask import render_template, url_for, request,redirect, flash
 from flask import Blueprint
+from .database import db
+from .models import Data
 
-from .models import Data, db
+table = Blueprint('table', __name__,template_folder='templates',static_folder='static',static_url_path='/project/static')
 
-crud_requests = Blueprint('crud-requests', __name__)
-
-@crud_requests.route('/')
+@table.route('/')
 def index():
     all_data = Data.query.all()
     return render_template("index.html", all_data = all_data)
-@crud_requests.route('/insert',methods=['POST'])
+@table.route('/insert',methods=['POST'])
 def insert():
     if request.method=="POST":
         name = request.form['name']
@@ -20,9 +20,9 @@ def insert():
         db.session.add(my_data)
         db.session.commit()
         flash("New request was created")
-        return redirect(url_for('crud-requests.index'))
+        return redirect(url_for('table.index'))
 
-@crud_requests.route('/update', methods = ['POST'])
+@table.route('/update', methods = ['POST'])
 def update():
  
     if request.method == 'POST':
@@ -37,13 +37,13 @@ def update():
         db.session.commit()
         flash("Request was updated successfully")
  
-        return redirect(url_for('crud-requests.index'))
+        return redirect(url_for('table.index'))
 
-@crud_requests.route('/delete/<id>/', methods = ['GET', 'POST'])
+@table.route('/delete/<id>/', methods = ['GET', 'POST'])
 def delete(id):
     my_data = Data.query.get(id)
     db.session.delete(my_data)
     db.session.commit()
     flash("Request was deleted successfully")
  
-    return redirect(url_for('crud-requests.index'))
+    return redirect(url_for('table.index'))

@@ -71,7 +71,7 @@
                                     <h4 class="modal-title">Edit request</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ url_for('crud-requests.update') }}" method="POST">
+                                    <form action="{{ url_for('table.update') }}" method="POST">
                                         <div class="form-group">
                                             <input type="hidden"  name="id" value="{{item.id}}">
                                             <label>Name:</label>
@@ -113,7 +113,7 @@
                             <h4 class="modal-title">Request</h4>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ url_for('crud-requests.insert') }}" method="POST">
+                            <form action="{{ url_for('table.insert') }}" method="POST">
                                 <div class="form-group">
                                     <label>Name:</label>
                                     <input type="text" class="form-control" name="name" required="1">
