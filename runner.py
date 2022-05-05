@@ -18,10 +18,19 @@ def setup_database(app):
     with app.app_context():
         db.create_all()
 
-if __name__ == '__main__':
+def main():
+    print("!!!!!")
     app = create_app()
     if not os.path.isfile('/test.db'):
         setup_database(app)
-    
+    @app.shell_context_processor
+    def make_shell_context():
+        return {'db': db}
     app.run()
+
+if __name__ == '__main__':
+    main()
+    
+    
+
 
