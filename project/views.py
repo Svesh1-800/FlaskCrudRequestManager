@@ -1,6 +1,6 @@
 from flask import render_template, url_for, request,redirect, flash
 from flask import Blueprint
-from .database import db
+from database import db
 from .models import Data
 from .forms import UserRequestForm
 
