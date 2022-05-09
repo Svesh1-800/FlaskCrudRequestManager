@@ -10,7 +10,7 @@ table = Blueprint('table', __name__,template_folder='templates',static_folder='s
 def index():
     all_data = Data.query.all()
     form = UserRequestForm()
-    return render_template("index.html", all_data = all_data, form=form)
+    return render_template("project/index.html", all_data = all_data, form=form)
 @table.route('/insert',methods=['POST'])
 def insert():
     if request.method=="POST":
