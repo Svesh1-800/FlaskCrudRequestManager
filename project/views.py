@@ -3,10 +3,11 @@ from flask import Blueprint
 from database import db
 from .models import Data
 from .forms import UserRequestForm
-
+from flask_login import login_required
 table = Blueprint('table', __name__,template_folder='templates',static_folder='static',static_url_path='/project/static')
 
 @table.route('/')
+@login_required
 def index():
     all_data = Data.query.all()
     form = UserRequestForm()

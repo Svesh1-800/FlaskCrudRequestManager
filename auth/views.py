@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from database import db
 from .models import User
-
+from flask_login import login_user, login_required, logout_user
 
 auth = Blueprint('auth', __name__,template_folder='templates')
 
@@ -11,9 +11,10 @@ def login():
         return render_template('auth/login.html')
     else:
         data = request.form
-        user = User.query.get(username=data['name'])
+        user = User.query.filter_by(username=data['name']).first()
         if user:
-            return "ОН СУЩЕСТВУЕТ"
+            login_user(user)
+            return redirect(url_for('table.index'))
         return "ЭХХХ"
 
 @auth.route('/signup', methods=['POST', 'GET'])
@@ -38,4 +39,5 @@ def signup():
 
 @auth.route('/logout')
 def logout():
-    return 'Logout'
+    logout_user()
+    return redirect(url_for('table.index'))
