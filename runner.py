@@ -2,7 +2,7 @@ import os
 from database import db
 from project.models import Data, DataType
 from auth.models import User
-from project import create_app,setup_database
+from setup import create_app,setup_database
 from flask_migrate import Migrate
 from project.views import table
 from auth.views import auth
