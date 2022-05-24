@@ -1,16 +1,17 @@
 from flask import render_template, url_for, request,redirect, flash
 from flask import Blueprint
-from .database import db
+from database import db
 from .models import Data
 from .forms import UserRequestForm
-
+from flask_login import login_required
 table = Blueprint('table', __name__,template_folder='templates',static_folder='static',static_url_path='/project/static')
 
 @table.route('/')
+@login_required
 def index():
     all_data = Data.query.all()
     form = UserRequestForm()
-    return render_template("index.html", all_data = all_data, form=form)
+    return render_template("project/index.html", all_data = all_data, form=form)
 @table.route('/insert',methods=['POST'])
 def insert():
     if request.method=="POST":
