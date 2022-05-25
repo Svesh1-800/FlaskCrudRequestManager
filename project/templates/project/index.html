@@ -9,6 +9,10 @@
             <div class="jumbotron p-3">
                 <h2>Manage <b>Requests</b><button type="button" class="btn btn-success float-end need-hide" data-bs-toggle="modal"
                         data-bs-target="#addRow">Add new request</button></h2>
+                        <div>
+                            <p>Manager: {{ current_user }}<br><a href="{{ url_for('auth.logout') }}">Log out</a></p>
+                        </div>
+                        
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
                 {% for message in messages %}
