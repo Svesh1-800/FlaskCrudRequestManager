@@ -15,7 +15,8 @@ def login():
         if user:
             login_user(user)
             return redirect(url_for('table.index'))
-        return "ЭХХХ"
+        flash("Such user doesnt't exist")
+        return render_template('auth/login.html')
 
 @auth.route('/signup', methods=['POST', 'GET'])
 def signup():
@@ -34,12 +35,14 @@ def signup():
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
+        login_user(new_user)
         return redirect(url_for("table.index"))
     return render_template('auth/signup.html',form= form)
  
 
 
 @auth.route('/logout')
+@login_required
 def logout():
     logout_user()
-    return redirect(url_for('table.index'))
+    return redirect(url_for('auth.login'))

@@ -3,7 +3,7 @@ from flask import Blueprint
 from database import db
 from .models import Data
 from .forms import UserRequestForm
-from flask_login import login_required
+from flask_login import login_required, current_user
 table = Blueprint('table', __name__,template_folder='templates',static_folder='static',static_url_path='/project/static')
 
 @table.route('/')
@@ -11,7 +11,7 @@ table = Blueprint('table', __name__,template_folder='templates',static_folder='s
 def index():
     all_data = Data.query.filter_by(id=current_user.id).all()
     form = UserRequestForm()
-    return render_template("project/index.html", all_data = all_data, form=form)
+    return render_template("project/index.html", all_data = all_data, form=form, current_user= current_user )
 @table.route('/insert',methods=['POST'])
 def insert():
     if request.method=="POST":
@@ -28,6 +28,7 @@ def insert():
         return redirect(url_for('table.index'))
 
 @table.route('/update', methods = ['POST'])
+@login_required
 def update():
  
     if request.method == 'POST':
@@ -45,6 +46,7 @@ def update():
         return redirect(url_for('table.index'))
 
 @table.route('/delete/<id>/', methods = ['GET', 'POST'])
+@login_required
 def delete(id):
     my_data = Data.query.get(id)
     db.session.delete(my_data)
