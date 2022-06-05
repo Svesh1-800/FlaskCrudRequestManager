@@ -31,6 +31,7 @@
                         <th>Name</th>
                         <th class="need-hide">Email</th>
                         <th class="need-hide">Phone</th>
+                        <th class="need-hide">Type</th>
                         <th class="need-hide">Action</th>
                     </tr>
                     {% for item in all_data %}
@@ -39,6 +40,7 @@
                         <td>{{item.name}}</td>
                         <td class="need-hide">{{item.email}}</td>
                         <td class="need-hide">{{item.phone}}</td>
+                        <td class="need-hide">{{item.data_type}}</td>
                         <td class="need-hide">
                             <a href="#" class="btn btn-warning btn-xs" data-bs-toggle="modal"
                                 data-bs-target="#editRow{{item.id}}">Edit</a>
@@ -94,6 +96,10 @@
                                             <input type="number" class="form-control" name="phone" required="1"
                                                 value="{{item.phone}}">
                                         </div>
+                                        <div class="form-group">
+                                            <label>Type:</label>
+                                            {{ form.req_type(class_="form-control",value = "wefe") }}
+                                        </div>
                                         <div class="modal-footer">
 
                                             <button type="button" class="btn btn-secondary"
@@ -136,6 +142,10 @@
                                 <div class="form-group">
                                     <label>Phone:</label>
                                     {{ form.phone(class_="form-control") }}
+                                </div>
+                                <div class="form-group">
+                                    <label>Type:</label>
+                                    {{ form.req_type(class_="form-control") }}
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"

@@ -8,12 +8,14 @@ class Data(db.Model):
     email = db.Column(db.String(100))
     phone = db.Column(db.String(100))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    data_type = db.Column(db.String(100))
     #data_type_id = db.Column(db.Integer,db.ForeignKey('data-type.id')) # это на будущее
 
-    def __init__(self,name,email,phone,user_id):
+    def __init__(self,name,email,phone,req_type,user_id):
         self.name = name
         self.email = email
         self.phone = phone
+        self.data_type = req_type
         self.user_id = user_id
 
 

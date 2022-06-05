@@ -9,7 +9,9 @@ table = Blueprint('table', __name__,template_folder='templates',static_folder='s
 @table.route('/')
 @login_required
 def index():
-    all_data = Data.query.filter_by(id=current_user.id).all()
+    print(current_user.id)
+    all_data = Data.query.filter_by(user_id=current_user.id).all()
+    print(all_data)
     form = UserRequestForm()
     return render_template("project/index.html", all_data = all_data, form=form, current_user= current_user )
 @table.route('/insert',methods=['POST'])
@@ -18,10 +20,11 @@ def insert():
         name = request.form['name']
         email = request.form['email']
         phone = request.form['phone']
+        req_type = request.form['req_type']
         user_id = current_user.id
 
         
-        my_data = Data(name, email, phone,user_id)
+        my_data = Data(name, email, phone,req_type,user_id)
         db.session.add(my_data)
         db.session.commit()
         flash("New request was created")
@@ -39,6 +42,7 @@ def update():
         my_data.name = request.form['name']
         my_data.email = request.form['email']
         my_data.phone = request.form['phone']
+        my_data.data_type = request.form['req-type']
  
         db.session.commit()
         flash("Request was updated successfully")
