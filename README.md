@@ -1,4 +1,4 @@
-# English Dictionary
+# Flask Crud Example
 
 [![Python Version](https://img.shields.io/badge/python-3.9.5-brightgreen.svg)](https://python.org)
 [![Flask Version](https://img.shields.io/badge/flask-2.1.2-brightgreen.svg)](https://flask.palletsprojects.com/en/2.1.x/)
