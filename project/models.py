@@ -43,3 +43,34 @@ class Department(db.Model):
     def __str__(self):
         return 'Department: {}'.format(self.name)
 
+#not in use
+class Achievement(db.Model):
+    __tablename__='achievement'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    description = db.Column(db.String(300))
+    
+
+    def __repr__(self):
+        return '<Achievement {}>'.format(self.name)
+
+    def __str__(self):
+        return 'Achievement: {}'.format(self.name)
+
+#not in use
+class Rank(db.Model):
+    __tablename__='rank'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    salary = db.Column(db.Integer)
+    
+
+    def __repr__(self):
+        return '<Rank {}>'.format(self.name)
+
+    def __str__(self):
+        return 'Rank: {}'.format(self.name)
+    
+
+
+
